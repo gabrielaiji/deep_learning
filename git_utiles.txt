@@ -1,0 +1,63 @@
+Quelques commandes utiles
+
+***********
+Les commandes les plus importantes
+
+git pull
+git add .
+git commit -m "blabla"
+git push
+
+
+*******
+Pour mieux comprendre :
+
+Voir les changements qu'on a fait localement (machine locale) :
+git status
+
+Voir l'historiques des commit ( touche 'q' pour sortir) :
+git log
+
+
+Ajouter des changements qu'on a fait pour le prochain commit
+git add <path>
+
+ex : git add data/test.txt
+
+Pour ajouter tous les changements qu'on a fait localement :
+git add .
+
+
+Faire un commit (ça créer une version, un "commit" sur la machine localement) :
+git commit -m "description du commit"
+
+
+Envoyer tous les nouveaux commits sur le repo git :
+git push
+
+Récupérer les commits du repo git :
+git pull
+
+
+*****************
+Branches
+
+Créer une branche : (copie la branche actuelle vers la nouvelle)
+git checkout -b <nom_branch>
+
+Se déplacer vers une autre branche : 
+git checkout <nom_branch>
+
+Merger une branche vers la branche actuelle:
+git merge <nom_branch>
+
+Supprimer une branche : 
+git branch -d <nom_branch>
+
+Lister les branches existantes
+git branch -a
+
+Un petit git log joli avec toutes les branches : 
+git log --graph --all
+git log --graph --all --oneline
+
