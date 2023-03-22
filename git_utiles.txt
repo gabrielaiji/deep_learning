@@ -32,10 +32,10 @@ Faire un commit (ça créer une version, un "commit" sur la machine localement) 
 git commit -m "description du commit"
 
 
-Envoyer tous les nouveaux commits sur le repo git :
+Envoyer tous les nouveaux commits sur le repo git sur le serveur :
 git push
 
-Récupérer les commits du repo git :
+Récupérer les commits du repo git sur le serveur :
 git pull
 
 
