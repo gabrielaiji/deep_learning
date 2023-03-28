@@ -27,7 +27,7 @@ def partition_move_file(data_path, origin_partition, new_partitions, local_path,
 	parition_path = new_partitions[get_index_partition(borders, current_index, shuffle_indices)]
 	new_path = os.path.join(data_path, os.path.join(parition_path, local_path))
 
-	shutil.copyFile(original_path, new_path)
+	shutil.copyfile(original_path, new_path)
 
 
 def partition_sub_type(data_path, origin_partition, new_partitions, borders, current_type, shuffle_indices, current_index):
