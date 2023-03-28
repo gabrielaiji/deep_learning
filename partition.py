@@ -30,7 +30,7 @@ def partition_move_file(data_path, origin_partition, new_partitions, local_path,
 
 
 def partition_sub_type(data_path, origin_partition, new_partitions, borders, current_type, shuffle_indices, current_index):
-	type_path = os.path.join(data_path, current_type)
+	type_path = os.path.join(data_path, os.path.join(origin_partition,current_type))
 	dirs = os.listdir(type_path)
 
 	for item in dirs:
@@ -49,7 +49,7 @@ def partition_sub_type(data_path, origin_partition, new_partitions, borders, cur
 	return current_index
 
 def partition_type(data_path, origin_partition, new_partitions, percentages, current_type):
-	type_path = os.path.join(data_path, current_type)
+	type_path = os.path.join(data_path, os.path.join(origin_partition,current_type))
 	nb_images = count_images(type_path)
 
 	shuffle_indices = np.random.permutation(nb_images)
@@ -80,7 +80,7 @@ def partition_data(data_path, origin_partition, new_partitions, percentages):
 	for item in dirs:
 		itemPath = os.path.join(original_path, item)
 
-		if os.path.isfile(itemPath):
+		if os.path.isdir(itemPath):
 			partition_type(data_path, origin_partition, new_partitions, percentages, item)
 		else:
 			print("Not dir : " + itemPath)
