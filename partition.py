@@ -5,7 +5,7 @@ import shutil
 from math import ceil
 
 def get_partition_borders(nb_elements, percentages):
-	borders = [0 for k in range(len(percentages))]
+	borders = [0 for k in range(len(percentages)) -1 ]
 
 	borders[0] = ceil(nb_elements * percentages[0])
 	for i in range(1, len(percentages) -1):
@@ -16,7 +16,7 @@ def get_partition_borders(nb_elements, percentages):
 def get_index_partition(borders, current_index, shuffle_indices):
 	temp_border = 0
 	shuffle_indice = shuffle_indices[current_index]
-	while shuffle_indice > borders[temp_border] and temp_border < len(borders):
+	while shuffle_indice > borders[temp_border] and temp_border < len(borders)-1:
 		temp_border+=1
 
 	return temp_border
@@ -39,7 +39,7 @@ def partition_sub_type(data_path, origin_partition, new_partitions, borders, cur
 
 		if os.path.isfile(itemPath):
 			local_path = os.path.join(current_type, item)
-			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, shuffle_indices)
+			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, current_index, shuffle_indices)
 			current_index +=1
 		elif os.path.isdir(itemPath):
 			current_sub_type = os.path.join(current_type, item)
@@ -65,7 +65,7 @@ def partition_type(data_path, origin_partition, new_partitions, percentages, cur
 
 		if os.path.isfile(itemPath):
 			local_path = os.path.join(current_type, item)
-			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, shuffle_indices)
+			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, current_index, shuffle_indices)
 			current_index +=1
 		elif os.path.isdir(itemPath):
 			current_sub_type = os.path.join(current_type, item)
