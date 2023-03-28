@@ -19,7 +19,7 @@ def countRecFiles(path):
 	return count
 
 
-originPath = "./data/train/"
+originPath = "./data/global/"
 dirs = os.listdir( originPath )
 
 #dirs = filter(os.path.isdir, os.listdir(path))

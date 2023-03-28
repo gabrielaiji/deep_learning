@@ -16,7 +16,7 @@ def get_partition_borders(nb_elements, percentages):
 def get_index_partition(borders, current_index, shuffle_indices):
 	temp_border = 0
 	shuffle_indice = shuffle_indices[current_index]
-	while shuffle_indice > borders[temp_border] and temp_border < len(borders)-1:
+	while temp_border < len(borders) and shuffle_indice > borders[temp_border]:
 		temp_border+=1
 
 	return temp_border
