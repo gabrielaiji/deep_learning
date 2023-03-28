@@ -24,7 +24,6 @@ def partition_move_file(data_path, origin_partition, new_partitions, local_path,
 	original_path = os.path.join(data_path, os.path.join(origin_partition, local_path))
 
 	parition_path = new_partitions[get_index_partition(borders, current_index, shuffle_indices)]
-
 	new_path = os.path.join(data_path, os.path.join(parition_path, local_path))
 
 	os.rename(original_path, new_path)
@@ -33,21 +32,21 @@ def partition_move_file(data_path, origin_partition, new_partitions, local_path,
 def partition_sub_type(data_path, origin_partition, new_partitions, borders, current_type, shuffle_indices, current_index):
 	type_path = os.path.join(data_path, current_type)
 	dirs = os.listdir(type_path)
-    for item in dirs:
-    	itemPath = os.path.join(type_path, item) 
 
+	for item in dirs:
+		itemPath = os.path.join(type_path, item)
 
-        if os.path.isfile(itemPath):
-        	local_path = os.path.join(current_type, item)
-        	partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, shuffle_indices)
-        	current_index +=1
-        elif os.path.isdir(itemPath):
-        	current_sub_type = os.path.join(current_type, item)
-        	current_index = partition_sub_type(data_path, origin_partition, new_partitions, borders, current_sub_type, shuffle_indices, current_index)
-        else:
-            print("Unknown : " + itemPath)
+		if os.path.isfile(itemPath):
+			local_path = os.path.join(current_type, item)
+			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, shuffle_indices)
+			current_index +=1
+		elif os.path.isdir(itemPath):
+			current_sub_type = os.path.join(current_type, item)
+			current_index = partition_sub_type(data_path, origin_partition, new_partitions, borders, current_sub_type, shuffle_indices, current_index)
+		else:
+			print("Unknown : " + itemPath)
 
-    return current_index
+	return current_index
 
 def partition_type(data_path, origin_partition, new_partitions, percentages, current_type):
 	type_path = os.path.join(data_path, current_type)
@@ -59,31 +58,32 @@ def partition_type(data_path, origin_partition, new_partitions, percentages, cur
 	current_index = 0
 
 	dirs = os.listdir(type_path)
-    for item in dirs:
-        itemPath = os.path.join(type_path, item) 
+	for item in dirs:
+		itemPath = os.path.join(type_path, item) 
 
 
-        if os.path.isfile(itemPath):
-        	local_path = os.path.join(current_type, item)
-        	partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, shuffle_indices)
-        	current_index +=1
-        elif os.path.isdir(itemPath):
-        	current_sub_type = os.path.join(current_type, item)
-            current_index = partition_sub_type(data_path, origin_partition, new_partitions, borders, current_sub_type, shuffle_indices, current_index)
-        else:
-            print("Unknown : " + itemPath)
+		if os.path.isfile(itemPath):
+			local_path = os.path.join(current_type, item)
+			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, shuffle_indices)
+			current_index +=1
+		elif os.path.isdir(itemPath):
+			current_sub_type = os.path.join(current_type, item)
+			current_index = partition_sub_type(data_path, origin_partition, new_partitions, borders, current_sub_type, shuffle_indices, current_index)
+		else:
+			print("Unknown : " + itemPath)
 
 
 def partition_data(data_path, origin_partition, new_partitions, percentages):
+	original_path = os.path.join(data_path, origin_partition)	
 
-	dirs = os.listdir(type_path)
+	dirs = os.listdir(original_path)
 	for item in dirs:
-		itemPath = os.path.join(type_path, item)
+		itemPath = os.path.join(original_path, item)
 
 		if os.path.isfile(itemPath):
-            partition_type(data_path, origin_partition, new_partitions, percentages, item)
-        else:
-        	print("Not dir : " + itemPath)
+			partition_type(data_path, origin_partition, new_partitions, percentages, item)
+		else:
+			print("Not dir : " + itemPath)
 
 
 
@@ -95,3 +95,4 @@ origin_partition = "global/"
 new_partitions = ["validation/", "test/", "train/"]
 percentages = [0.10, 0.10, 0.80]
 
+partition_data(path, origin_partition, new_partitions, percentages)
