@@ -21,13 +21,16 @@ def get_index_partition(borders, current_index, shuffle_indices):
 
 	return temp_border
 
-def partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, current_index, shuffle_indices):
-	original_path = os.path.join(data_path, os.path.join(origin_partition, local_path))
-
+def partition_move_file(data_path, origin_partition, new_partitions, local_dire_path, item_name, borders, current_index, shuffle_indices):
+	original_path = os.path.join(data_path, os.path.join(origin_partition, os.path.join(local_dire_path, item_name)))
+	
 	parition_path = new_partitions[get_index_partition(borders, current_index, shuffle_indices)]
-	new_path = os.path.join(data_path, os.path.join(parition_path, local_path))
+	new_path = os.path.join(data_path, os.path.join(parition_path, local_dire_path))
 
-	shutil.copyfile(original_path, new_path)
+	if not os.path.isdir(new_path):
+		os.mkdir(new_path)
+
+	shutil.copyfile(original_path, os.path.join(new_path, item_name))
 
 
 def partition_sub_type(data_path, origin_partition, new_partitions, borders, current_type, shuffle_indices, current_index):
@@ -38,8 +41,7 @@ def partition_sub_type(data_path, origin_partition, new_partitions, borders, cur
 		itemPath = os.path.join(type_path, item)
 
 		if os.path.isfile(itemPath):
-			local_path = os.path.join(current_type, item)
-			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, current_index, shuffle_indices)
+			partition_move_file(data_path, origin_partition, new_partitions, current_type, item, borders, current_index, shuffle_indices)
 			current_index +=1
 		elif os.path.isdir(itemPath):
 			current_sub_type = os.path.join(current_type, item)
@@ -64,8 +66,7 @@ def partition_type(data_path, origin_partition, new_partitions, percentages, cur
 
 
 		if os.path.isfile(itemPath):
-			local_path = os.path.join(current_type, item)
-			partition_move_file(data_path, origin_partition, new_partitions, local_path, borders, current_index, shuffle_indices)
+			partition_move_file(data_path, origin_partition, new_partitions, current_type, item, borders, current_index, shuffle_indices)
 			current_index +=1
 		elif os.path.isdir(itemPath):
 			current_sub_type = os.path.join(current_type, item)
