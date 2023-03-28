@@ -82,9 +82,15 @@ def load_data(data_path, classes, dataset='train', image_size=128):
     return x, y
 
 
-labels = ['test']
+labels = ['feu', 'eau']
 
 path = "./data/"
+
+nb_images = 0;
+for i in range(len(labels)):
+        #dirs = sorted(os.listdir(data_path + dataset + '/' + classes[i]) +"/")
+        type_path = path + 'train' + "/" + labels[i] +"/"
+        nb_images += count_images(type_path)
 
 x_train, y_train = load_data(path, labels, dataset='train', image_size=128)
 print(x_train.shape, y_train.shape)
@@ -92,7 +98,7 @@ print(x_train.shape, y_train.shape)
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(12, 12))
-shuffle_indices = np.random.permutation(9)
+shuffle_indices = np.random.permutation(nb_images)
 for i in range(0, 9):
     plt.subplot(3, 3, i+1)
     image = x_train[shuffle_indices[i]]
