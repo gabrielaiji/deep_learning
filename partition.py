@@ -5,7 +5,7 @@ import shutil
 from math import ceil
 
 def get_partition_borders(nb_elements, percentages):
-	borders = [0 for k in range(len(percentages)) -1 ]
+	borders = [0 for k in range(len(percentages)-1) ]
 
 	borders[0] = ceil(nb_elements * percentages[0])
 	for i in range(1, len(percentages) -1):
