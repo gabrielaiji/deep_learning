@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 from loadimages import *
 
 
-labels = ['feu', 'eau']
+#labels = ['acier', 'feu', 'eau']
+labels = ['acier', 'combat', 'dragon', 'fée', 'glace', 'insecte', 'normal', 'plante', 'poison', 'psy', 'roche', 'sol', 'spectre', 'tenebres', 'vol', 'électrique', 'feu', 'eau']
 
 path = "./data/"
 
