@@ -1,0 +1,120 @@
+
+-Checking for existing keys
+ls -al ~/.ssh
+
+One of these ?
+    id_rsa.pub
+    id_ecdsa.pub
+    id_ed25519.pub
+
+
+https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=windows
+
+-Generate a new key
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+
+configure git
+git config --global user.email "your@example.com"
+
+
+-Make a copy of the public key
+clip < ~/.ssh/id_ed25519.pub
+
+
+-------------------------------------------------------------
+Revert files
+
+https://stackoverflow.com/questions/1146973/how-do-i-revert-all-local-changes-in-git-managed-project-to-previous-state
+
+To revert changes made to your working copy, do this:
+git restore . #Path 
+git checkout . #a verif
+
+
+To revert changes made to the index (i.e., that you have added), do this. Warning this will reset all of your unpushed commits to master!
+git reset
+
+
+To revert a change that you have committed:
+git revert <commit 1> <commit 2> 
+
+
+To remove untracked files (e.g., new files, generated files):
+git clean -f
+
+
+Or untracked directories (e.g., new or automatically generated directories):
+git clean -fd
+
+
+
+------------------------------------------------------------------
+Remove file from git without deleting it from the workingDirectory
+
+single file:
+git rm --cached file_to_remove.txt
+
+directory:
+git rm --cached -r directory_to_remove
+
+
+----------------------------------------------------------------
+https://stackoverflow.com/questions/1967370/git-replacing-lf-with-crlf
+
+
+core.autocrlf=true:      core.autocrlf=input:     core.autocrlf=false:
+
+     repository               repository               repository
+      ^      V                 ^      V                 ^      V
+     /        \               /        \               /        \
+crlf->lf    lf->crlf     crlf->lf       \             /          \
+   /            \           /            \           /            \
+
+
+ git config --system core.autocrlf false            # per-system solution
+ git config --global core.autocrlf false            # per-user solution
+ git config --local core.autocrlf false             # per-project solution
+
+
+
+----------------------------------------------------------------
+
+git init
+git remote add origin $url_of_clone_source
+git fetch origin
+git checkout -b main --track origin/main # origin/master is clone's default
+
+
+
+----------------------------
+Branches
+
+Créer une branche : (copie la branche actuelle vers la nouvelle)
+git checkout -b <nom_branch>
+
+Se déplacer vers une autre branche : 
+git checkout <nom_branch>
+
+Merger une branche vers la branche actuelle:
+git merge <nom_branch>
+
+Supprimer une branche : 
+git branch -d <nom_branch>
+
+Lister les branches existantes
+git branch -a
+
+Un petit git log joli avec toutes les branches : 
+git log --graph --all
+git log --graph --all --oneline
+
+
+------------
+Compter les differences
+git diff --cached --stat | wc -l
+
+
+-----------
+
+https://stackoverflow.com/questions/37770467/why-do-i-have-to-git-push-set-upstream-origin-branch

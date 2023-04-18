@@ -47,24 +47,16 @@ def count_partition(data_path, data_sets, global_data_set):
 	global_path = os.path.join(data_path, global_data_set)
 
 	dirs = os.listdir( global_path )
+	sum_tot = 0
 	for label in dirs:
 		count_set = [0 for k in range(len(data_sets))]
 
-		for i in range(len(data_sets)):
-			set_path = os.path.join(data_path, os.path.join(data_sets[i], label))
+		set_path = os.path.join(data_path, os.path.join(global_data_set, label))
+		img_sum = countRecFiles(set_path)
+		sum_tot += img_sum
 
-			if os.path.isdir(set_path):
-				count_set[i] = countRecFiles(set_path)
-
-		img_sum = sum(count_set)
-		print()
 		print(label +"("+str(img_sum)+")")
-		print("*****")
-		for i in range(len(data_sets)):
-			perce =  str(round(count_set[i]/img_sum * 100,2))
-			#print(data_sets[i] + " : " +  + "% (" + str(count_set[i]) + ")")
-			print("{0:11} : {1:5}% ({2:1})".format(data_sets[i], perce, str(count_set[i])))
-
+	print("TOTAL : "+str(sum_tot))
 
 
 data_sets = ["train", "validation", "test"]
