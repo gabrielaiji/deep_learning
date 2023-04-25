@@ -1,5 +1,6 @@
 import os, sys
 from select_rectangle import RectangleBuilder
+from PIL import Image
 
 
 def search_cards_set(path):
@@ -11,13 +12,19 @@ def search_cards_set(path):
 		if os.path.isdir(itemPath):
 			search_cards_set(itemPath)
 		else:
-			if "carte" in item:
+			if ("carte" in item) and (not "cropped" in item):
+				
 				rectangle = RectangleBuilder(itemPath)
 				im = Image.open(itemPath)
 				crop_rectangle = rectangle.getRect()
 
-				cropped_im = im.crop(crop_rectangle)
-				cropped_im.save("test.png")
+				if(crop_rectangle != (0,0,0,0) ):
+					nom =  item.split(".")
+					new_nom = nom[0]+"_cropped"
+
+					cropped_im = im.crop(crop_rectangle)
+					cropped_im.save(path+"/"+new_nom+".png")
+					os.remove(itemPath)
 
 
 
