@@ -16,7 +16,8 @@ def convert_sub_dir(path):
 				if img.mode != 'RGBA':
 					names = itemPath.split(".")
 					print(names)
-					img.convert("RGBA").save("./"+names[1], "png")
+					img.convert("RGBA").save("./"+names[1]+"_rgba.png")
+					os.remove(itemPath)
 					print("Converted "+itemPath)
 
 
