@@ -38,7 +38,7 @@ def load_sub_type(type_path, image_size,  x, y, current_index, idx_class):
     dirs = os.listdir(type_path)
 
     for item in dirs:
-        itemPath = os.path.join(type_path, item) 
+        itemPath = os.path.join(type_path, item)
 
         if os.path.isdir(itemPath):
             current_index = load_sub_type(itemPath, image_size, x, y, current_index, idx_class)
