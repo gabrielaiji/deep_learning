@@ -115,26 +115,3 @@ def get_string_labels(labels_indexes, classes):
         		answer = answer + " + " + classes[int(index)]
 
     return answer
-
-Classes = ['acier', 'combat', 'dragon', 'fée', 'glace', 'insecte', 'normal', 'plante', 'poison', 'psy', 'roche', 'sol', 'spectre', 'tenebres', 'vol', 'électrique', 'feu', 'eau']
-#Classes = ['acier', 'combat']
-data_path = "../data/"
-
-IMAGE_SIZE = 64
-
-x_train, y_train = load_data(data_path, Classes, dataset='train', image_size=IMAGE_SIZE)
-x_train = x_train/255
-
-import matplotlib.pyplot as plt
-
-# Randomisation des indices et affichage de 9 images alétoires de la base d'apprentissage
-indices = np.arange(x_train.shape[0])
-np.random.shuffle(indices)
-plt.figure(figsize=(12, 12))
-for i in range(0, 9):
-    plt.subplot(3, 3, i+1)
-    label_string = get_string_labels(y_train[indices[i], :], Classes)
-    plt.title(label_string)
-    plt.imshow(x_train[indices[i]])
-plt.tight_layout()
-plt.show()
