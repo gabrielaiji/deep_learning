@@ -86,7 +86,11 @@ data_path = "./data/"
 
 nb_images = count_partition(data_path, "global", Classes)
 
+import numpy as np
+index = np.argsort(nb_images)
+
 for i in range(len(Classes)):
-	print("{0:11} : {1}".format(Classes[i], str(nb_images[i])))
+	print("{0:11} : {1}".format(Classes[index[i]], str(nb_images[index[i]])))
 
 print("{0:11} : {1}".format("'Total' : ", str(sum(nb_images))))
+
